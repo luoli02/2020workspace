@@ -24,7 +24,14 @@ public class ZookeeperLock {
     }
 
     public Lock lock(String lockId, long timeout) {
+        /**
+         * 创建一个临时有序的子节点 data为lockId
+         * 返回的Lock对象的active属性是false
+         */
         Lock lockNode = createLockNode(lockId);
+        /**
+         * 创建为节点后将Lock对象中设置
+         */
         lockNode = tryActiveLock(lockNode);// 尝试激活锁
         if (!lockNode.isActive()) {
             try {
@@ -50,12 +57,19 @@ public class ZookeeperLock {
     // 尝试激活锁
     private Lock tryActiveLock(Lock lockNode) {
         // 判断当前是否为最小节点
+        /**
+         * 罗里注释：
+         * 获取父节点下的主节点，然后进行组装
+         * 再根据索引获取到最小的一个临时有序的节点
+         */
         List<String> list = zkClient.getChildren(rootPath)
                 .stream()
                 .sorted()
                 .map(p -> rootPath + "/" + p)
                 .collect(Collectors.toList());
         String firstNodePath = list.get(0);
+
+
         if (firstNodePath.equals(lockNode.getPath())) {
             lockNode.setActive(true);
         } else {
@@ -85,6 +99,7 @@ public class ZookeeperLock {
 
 
     public Lock createLockNode(String lockId) {
+        //创建临时有序节点
         String nodePath = zkClient.createEphemeralSequential(rootPath + "/" + lockId, "lock");
         return new Lock(lockId, nodePath);
     }
