@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>罗里vue-2</title>
+
+</head>
+<body>
+
+<div id="app">
+    <h1>{{message}}</h1>
+    <h1 v-if="status">Yes</h1>
+    <h1 v-else>No</h1>
+    <h1 v-if="type ==='A'">A</h1>
+    <h1 v-if="type ==='B'">B</h1>
+    <h1 v-if="type ==='C'">C</h1>
+    <li v-for="(item,index) in items">
+        {{item.say}}--->{{index}}
+    </li>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+<script>
+    var vm = new Vue({
+        el:"#app",//绑定<div>
+        data:{    //数据
+            message:'hello vue',
+            status:false,
+            type:'A',
+            items:[
+                {say:111},
+                {say:222},
+                {say:333}
+            ]
+        }
+    })
+</script>
+
+</body>
+</html>

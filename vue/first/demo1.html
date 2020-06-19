@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>罗里vue</title>
+
+</head>
+<body>
+
+<div id="app">
+    <!--{{message}}-->
+    <span v-bind:title = "message">
+        666
+    </span>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+<script>
+    var vm = new Vue({
+        el:"#app",//绑定<div>
+        data:{    //数据
+            message:"hello vue"
+        }
+    })
+</script>
+
+</body>
+</html>

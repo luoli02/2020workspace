@@ -1,12 +1,9 @@
 package com.example.zookeeper.entity;
 
-import org.springframework.context.annotation.ImportSelector;
-import org.springframework.core.type.AnnotationMetadata;
-
-
-public class MySelector implements ImportSelector {
-    @Override
+//MySelector implements ImportSelector
+public class MySelector  {
+    /*@Override
     public String[] selectImports(AnnotationMetadata annotationMetadata) {
         return new String[]{"com.example.zookeeper.entity.Student"};
-    }
+    }*/
 }
